@@ -12,6 +12,7 @@ const characterSchema = new Schema(
 		name: { type: String, required: true },
 		class: { type: String, required: true },
         level: { type: Number, required: true },
+		spells: [],
 		owner: {
 			type: Schema.Types.ObjectID,
 			ref: 'User',

@@ -6,6 +6,7 @@ const express = require("express")
 const middleware = require('./utils/middleware')
 const CharacterRouter = require('./controllers/characters')
 const UserRouter = require('./controllers/user')
+const SpellRouter = require('./controllers/spells')
 const User = require("./models/user")
 // SEE MORE DEPENDENCIES IN ./utils/middleware.js
 // user and resource routes linked in ./utils/middleware.js
@@ -23,6 +24,7 @@ middleware(app)
 
 app.use('/auth', UserRouter)
 app.use('/characters', CharacterRouter)
+app.use('/spells', SpellRouter)
 
 app.get('/', (req, res) => {
     const { username, userId, loggedIn } = req.session

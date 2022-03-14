@@ -1,12 +1,12 @@
 {% layout 'layout.liquid' %}
 {% block content %}
     <div class="container-md">
-        <h1>Class spells</h1>
+        <h1>{{character.name}}'s Class Spells</h1>
         <a href="/characters/{{character.id}}">Back to character</a>
         <ul>
         {%for spell in spells%}
             <li>
-                <a href="/characters/{{character.id}}/spells/{{spell.index}}">{{spell.name}}</a>
+                <a href="/spells/{{character.id}}/{{spell.index}}">{{spell.name}}</a>
             </li>
         {%endfor%}
         </ul>
