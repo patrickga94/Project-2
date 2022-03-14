@@ -86,7 +86,7 @@ router.get('/:id/edit', (req, res) => {
 // update route
 router.put('/:id', (req, res) => {
 	const characterId = req.params.id
-	req.body.ready = req.body.ready === 'on' ? true : false
+	// req.body.ready = req.body.ready === 'on' ? true : false
 
 	Character.findByIdAndUpdate(characterId, req.body, { new: true })
 		.then(character => {
