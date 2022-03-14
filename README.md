@@ -13,3 +13,8 @@ User Story:
 Technologies:
 
 I plan on using CSS, javascript, mongoose, mongodb, express, liquid, and the dnd5eapi
+
+
+Whiteboard: https://miro.com/app/board/uXjVOF-fKPE=/?invite_link_id=869719621228
+
+ERD: https://miro.com/app/board/uXjVOF8goJI=/?invite_link_id=60429802694
