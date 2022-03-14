@@ -83,7 +83,7 @@ router.get('/:id/edit', (req, res) => {
 		})
 })
 
-//view spells route
+//index that shows all spells of the character's class
 router.get('/:id/spells', (req, res)=>{
 	const characterId =req.params.id
 	const { username, userId, loggedIn } = req.session
@@ -104,6 +104,27 @@ router.get('/:id/spells', (req, res)=>{
 		})
 })
 
+//show the details of each spell
+router.get('/:id/spells/:spellIndex', (req, res)=>{
+	const characterId =req.params.id
+	const spellIndex = req.params.spellIndex
+	const { username, userId, loggedIn } = req.session
+	// Character.findById(characterId)
+	// 	.then(character =>{
+			// const characterClass = character.class.toLowerCase()
+			fetch(`https://www.dnd5eapi.co/api/spells/${spellIndex}`)
+				.then(responseData =>{
+					return responseData.json()
+				.then(jsonData =>{
+					const spell = jsonData
+					res.render('spells/show', {spell, username, loggedIn})
+				})
+				})
+		// })
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
 
 // update route
 router.put('/:id', (req, res) => {

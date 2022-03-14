@@ -1,0 +1,10 @@
+{% layout 'layout.liquid' %}
+{% block content %}
+    <h1>{{spell.name}}</h1>
+    <p>Range: {{spell.range}}, Components: {{spell.components}},</p>
+    <p>Level: {{spell.level}}, Casting Time: {{spell.casting_time}}, Concentration: {%if spell.concentration%} Yes {%else%} No {%endif%}</p>
+    <p>{{spell.desc}}</p>
+    {%if spell.higher_level.length > 0%}
+    <p>At higher levels: {{spell.higher_level}}</p>
+    {%endif%}
+{%endblock%}
