@@ -86,6 +86,7 @@ router.get('/:id/edit', (req, res) => {
 //view spells route
 router.get('/:id/spells', (req, res)=>{
 	const characterId =req.params.id
+	const { username, userId, loggedIn } = req.session
 	Character.findById(characterId)
 		.then(character =>{
 			const characterClass = character.class.toLowerCase()
@@ -94,7 +95,7 @@ router.get('/:id/spells', (req, res)=>{
 					return responseData.json()
 				.then(jsonData =>{
 					const spells = jsonData.results
-					res.render('spells/index', {spells})
+					res.render('spells/index', {spells, username, loggedIn, character})
 				})
 				})
 		})
