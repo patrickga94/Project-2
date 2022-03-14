@@ -60,11 +60,14 @@ router.post('/login', async (req, res) => {
 
 				if (result) {
 					console.log('the user', user);
-
-          			const { username, loggedIn, userId } = req.session
+					req.session.username = username
+					req.session.loggedIn = true
+					req.session.userId = user.id
+					
+					// const { username, loggedIn, userId } = req.session
+					console.log('req.session: ', req.session)
 
 					console.log('session user id', req.session.userId)
-					console.log('req.session: ', req.session)
 					// redirect to /examples if login is successful
 					res.redirect('/')
 				} else {
@@ -87,7 +90,7 @@ router.post('/login', async (req, res) => {
 // logout route -> destroy the session
 router.get('/logout', (req, res) => {
 	req.session.destroy(() => {
-		res.redirect('/exa')
+		res.redirect('/')
 	})
 })
 

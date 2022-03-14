@@ -1,7 +1,7 @@
 {% layout 'layout.liquid' %}
 {% block content %}
 <div class="container-sm">
-    <form action="/examples" method="POST">
+    <form action="/characters" method="POST">
         <fieldset>
             <legend>Create New Character</legend>
             <label class="form-label">Name: </label>
@@ -24,12 +24,6 @@
                 name="level" 
                 class="form-control"
             >
-            <!-- <label class="form-label">Ready:</label>
-            <input 
-                type="checkbox" 
-                name="ready" 
-                class="form-check-input" -->
-            <!-- > -->
         </fieldset>
         <input type="submit" value="Create New Character" class="btn btn-success">
     </form>
