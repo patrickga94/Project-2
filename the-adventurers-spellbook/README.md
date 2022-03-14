@@ -1,5 +1,5 @@
-# Dungeons and Dragons Spell App
-**An all purpose spellbook for adventurers**
+# The Adventurer's Spellbook
+**An all purpose spellbook for D&D 5e players**
 
 User Story: 
 - As a user I want to open the app to a login/signup screen
