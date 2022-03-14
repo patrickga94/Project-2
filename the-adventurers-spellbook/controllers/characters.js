@@ -83,6 +83,27 @@ router.get('/:id/edit', (req, res) => {
 		})
 })
 
+//view spells route
+router.get('/:id/spells', (req, res)=>{
+	const characterId =req.params.id
+	Character.findById(characterId)
+		.then(character =>{
+			const characterClass = character.class.toLowerCase()
+			fetch(`https://www.dnd5eapi.co/api/classes/${characterClass}/spells`)
+				.then(responseData =>{
+					return responseData.json()
+				.then(jsonData =>{
+					const spells = jsonData.results
+					res.render('spells/index', {spells})
+				})
+				})
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
+
+
 // update route
 router.put('/:id', (req, res) => {
 	const characterId = req.params.id

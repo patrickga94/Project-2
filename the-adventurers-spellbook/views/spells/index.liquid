@@ -1,0 +1,9 @@
+{% layout 'layout.liquid'%}
+{% block content %}
+    <div class="container-md">
+        <h1>Class spells</h1>
+        {%for spell in spells%}
+            <a href="">{{spell.name}}</a>
+        {%endfor%}
+    </div>
+{%endblock%}
