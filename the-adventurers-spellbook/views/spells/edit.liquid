@@ -2,7 +2,7 @@
 {% layout 'layout.liquid'%}
 {% block content%}
     <div>
-        <form action="/spells/{{spell.id}}?_method=PUT" method="POST">
+        <form action="/spells/{{characterId}}/{{spell.id}}?_method=PUT" method="POST">
             <fieldset>
                 <legend>Edit Spell</legend>
                 <label class="form-label">
@@ -12,7 +12,7 @@
                         type="text"
                         name="name"
                         placeholder="spell name"
-                        value={{spell.name}}
+                        value="{{spell.name}}"
                     >
                 </label>
                 <label>
@@ -22,7 +22,7 @@
                         type="text"
                         name="desc"
                         placeholder="spell description"
-                        value={{spell.desc}}
+                        value="{{spell.desc}}"
                     >
                 </label>
                 <label>
@@ -32,7 +32,7 @@
                         type="text"
                         name="higher_level"
                         placeholder="higher level effects (if any)"
-                        value={{spell.higher_level}}
+                        value="{{spell.higher_level}}"
                     >
                 </label>
                 <label>
@@ -52,7 +52,7 @@
                         type="text"
                         name="components"
                         placeholder="spell components"
-                        value={{spell.components}}
+                        value="{{spell.components}}"
                     >
                 </label>
                 <label>
@@ -62,7 +62,7 @@
                         type="text"
                         name="material"
                         placeholder="spell materials if any"
-                        value={{spell.material}}
+                        value="{{spell.material}}"
                     >
                 </label>
                 <label>
@@ -72,7 +72,7 @@
                         type="text"
                         name="duration"
                         placeholder="spell duration"
-                        value={{spell.duration}}
+                        value="{{spell.duration}}"
                     >
                 </label>
                 <label>
@@ -93,7 +93,7 @@
                         type="text"
                         name="casting_time"
                         placeholder="spell casting time"
-                        value={{spell.casting_time}}
+                        value="{{spell.casting_time}}"
                     >
                 </label>
                 <label>
@@ -113,7 +113,7 @@
                         type="text"
                         name="classes"
                         placeholder="classes with spell access"
-                        value={{spell.classes}}
+                        value="{{spell.classes}}"
                     >
                 </label>
             </fieldset>

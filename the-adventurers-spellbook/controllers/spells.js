@@ -39,19 +39,34 @@ router.post('/', (req, res)=>{
 	})
 })
 
+//edit route takes you to the edit spell form
 router.get('/:id/:spellIndex/edit', (req, res)=>{
 	const characterId = req.params.id
 	const spellIndex = req.params.spellIndex
 	const { username, userId, loggedIn } = req.session
 	Spell.findById(spellIndex)
 		.then(spell =>{
-			res.render('spells/edit', {spell})
+			res.render('spells/edit', {spell, characterId})
 		})
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)
 		})
 
 })
+
+//update route updates the spell with new information
+router.put('/:id/:spellIndex', (req, res)=>{
+	const characterId = req.params.id
+	const spellIndex = req.params.spellIndex
+	req.body.concentration = req.body.concentration === "on" ? true : false 
+	const { username, userId, loggedIn } = req.session
+	Spell.findByIdAndUpdate(spellIndex, req.body, {new: true})
+		.then(spell =>{
+			console.log('the updated spell', spell)
+			res.redirect(`/spells/${characterId}/${spell.id}`)
+		})
+})
+
 // index that shows only spells the user created
 router.get('/:id/mine', (req, res) => {
 	const characterId = req.params.id
