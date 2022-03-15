@@ -16,7 +16,7 @@ const spellSchema = new Schema(
         duration: { type: String, required: true },
         concentration: { type: Boolean, required: true},
         casting_time: { type: String, required: true },
-        level: { type: Number, required: true },
+        level: { type: Number, min: 0, required: true },
         classes: [{type: String, required: true}],
 		owner: {
 			type: Schema.Types.ObjectID,

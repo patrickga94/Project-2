@@ -22,6 +22,11 @@ router.use((req, res, next) => {
 
 //Routes
 
+//new route to create a new spell
+router.get('/new', (req, res)=>{
+    res.render('spells/new')
+})
+
 //index that shows all spells of the character's class
 router.get('/:id', (req, res)=>{
 	const characterId =req.params.id
