@@ -30,6 +30,7 @@ router.get('/new', (req, res)=>{
 
 //route to create a new spell
 router.post('/', (req, res)=>{
+	req.body.classes = req.body.classes.split(" ")
 	req.body.concentration = req.body.concentration === "on" ? true : false 
 	req.body.owner = req.session.userId
 	Spell.create(req.body)
@@ -58,6 +59,7 @@ router.get('/:id/:spellIndex/edit', (req, res)=>{
 router.put('/:id/:spellIndex', (req, res)=>{
 	const characterId = req.params.id
 	const spellIndex = req.params.spellIndex
+	req.body.classes = req.body.classes.split(" ")
 	req.body.concentration = req.body.concentration === "on" ? true : false 
 	const { username, userId, loggedIn } = req.session
 	Spell.findByIdAndUpdate(spellIndex, req.body, {new: true})
