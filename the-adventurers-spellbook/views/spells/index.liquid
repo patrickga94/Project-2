@@ -13,7 +13,7 @@
         <a href="/spells/new">Create New Spell</a>
         {%for spell in customSpells%}
         <li>
-            <a href="/spells/{{character.id}}/{{spell.id}}">{{spell.name}}</a>
+            <a href="/spells/{{character.id}}/{{spell.id}}">{{spell.name}} Level: {{spell.level}}</a>
         </li>
     {%endfor%}
         </ul>

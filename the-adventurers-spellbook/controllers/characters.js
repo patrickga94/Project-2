@@ -23,18 +23,18 @@ router.use((req, res, next) => {
 // Routes
 
 // index ALL
-router.get('/', (req, res) => {
-	Character.find({})
-		.then(characters => {
-			const username = req.session.username
-			const loggedIn = req.session.loggedIn
+// router.get('/', (req, res) => {
+// 	Character.find({})
+// 		.then(characters => {
+// 			const username = req.session.username
+// 			const loggedIn = req.session.loggedIn
 			
-			res.render('characters/index', { characters, username, loggedIn })
-		})
-		.catch(error => {
-			res.redirect(`/error?error=${error}`)
-		})
-})
+// 			res.render('characters/index', { characters, username, loggedIn })
+// 		})
+// 		.catch(error => {
+// 			res.redirect(`/error?error=${error}`)
+// 		})
+// })
 
 // index that shows only the user's characters
 router.get('/mine', (req, res) => {
@@ -63,7 +63,7 @@ router.post('/', (req, res) => {
 	Character.create(req.body)
 		.then(character => {
 			console.log('this was returned from create', character)
-			res.redirect('/characters')
+			res.redirect('/characters/mine')
 		})
 		.catch(error => {
 			res.redirect(`/error?error=${error}`)
@@ -84,27 +84,7 @@ router.get('/:id/edit', (req, res) => {
 })
 
 
-// //show the details of each spell
-// router.get('/:id/spells/:spellIndex', (req, res)=>{
-// 	const characterId =req.params.id
-// 	const spellIndex = req.params.spellIndex
-// 	const { username, userId, loggedIn } = req.session
-// 	// Character.findById(characterId)
-// 	// 	.then(character =>{
-// 			// const characterClass = character.class.toLowerCase()
-// 			fetch(`https://www.dnd5eapi.co/api/spells/${spellIndex}`)
-// 				.then(responseData =>{
-// 					return responseData.json()
-// 				.then(jsonData =>{
-// 					const spell = jsonData
-// 					res.render('spells/show', {spell, username, loggedIn, characterId})
-// 				})
-// 				})
-// 		// })
-// 		.catch((error) => {
-// 			res.redirect(`/error?error=${error}`)
-// 		})
-// })
+
 
 // update route
 router.put('/:id', (req, res) => {
@@ -138,7 +118,7 @@ router.delete('/:id', (req, res) => {
 	const characterId = req.params.id
 	Character.findByIdAndRemove(characterId)
 		.then(character => {
-			res.redirect('/characters')
+			res.redirect('/characters/mine')
 		})
 		.catch(error => {
 			res.redirect(`/error?error=${error}`)

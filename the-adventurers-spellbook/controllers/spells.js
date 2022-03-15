@@ -121,7 +121,7 @@ router.get('/:id', (req, res)=>{
 					return responseData.json()
 				.then(jsonData =>{
 					spells = jsonData.results
-					Spell.find({classes: {$in: [character.class]}})
+					Spell.find({$and: [{classes: {$in: [character.class]}}, {owner: userId}]})
 						.then(spellList =>{
 							customSpells = spellList
 							res.render('spells/index', {spells, username, loggedIn, character, customSpells})
