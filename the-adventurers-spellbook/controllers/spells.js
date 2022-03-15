@@ -91,6 +91,8 @@ router.get('/:id/mine', (req, res) => {
 router.get('/:id', (req, res)=>{
 	const characterId =req.params.id
 	const { username, userId, loggedIn } = req.session
+	let spells
+	let customSpells
 	Character.findById(characterId)
 		.then(character =>{
 			const characterClass = character.class.toLowerCase()
@@ -98,8 +100,12 @@ router.get('/:id', (req, res)=>{
 				.then(responseData =>{
 					return responseData.json()
 				.then(jsonData =>{
-					const spells = jsonData.results
-					res.render('spells/index', {spells, username, loggedIn, character})
+					spells = jsonData.results
+					Spell.find({classes: {$in: [character.class]}})
+						.then(spellList =>{
+							customSpells = spellList
+							res.render('spells/index', {spells, username, loggedIn, character, customSpells})
+						})
 				})
 				})
 		})
@@ -112,34 +118,6 @@ router.get('/:id', (req, res)=>{
 
 
 //show the details of each spell
-// router.get('/:id/:spellIndex', (req, res)=>{
-// 	const characterId =req.params.id
-// 	const spellIndex = req.params.spellIndex
-// 	const { username, userId, loggedIn } = req.session
-// 	//search the api for the spell details
-// 	if(spellIndex.length < 20 && spellIndex.length > 0){
-// 		fetch(`https://www.dnd5eapi.co/api/spells/${spellIndex}`)
-// 			.then(responseData =>{
-// 				return responseData.json()
-// 			.then(jsonData =>{
-// 				const spell = jsonData
-// 				res.render('spells/show', {spell, username, loggedIn, characterId, userId})
-// 			})
-// 			})
-// 		.catch((error) => {
-// 			res.redirect(`/error?error=${error}`)
-// 		})
-// 	} else if(spellIndex.length > 20){
-// 		Spell.findById(spellIndex)
-// 			.then(spell =>{
-// 				res.render('spells/show', {spell, username, loggedIn, characterId, userId})
-// 			})
-// 			.catch((error) => {
-// 				res.redirect(`/error?error=${error}`)
-// 			})
-// 	}
-// })
-
 router.get('/:id/:spellIndex', (req, res)=>{
 	const characterId =req.params.id
 	const spellIndex = req.params.spellIndex
