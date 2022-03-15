@@ -25,7 +25,8 @@ router.use((req, res, next) => {
 
 //new route to the create new spell form
 router.get('/new', (req, res)=>{
-    res.render('spells/new')
+	const { username, userId, loggedIn } = req.session
+    res.render('spells/new', {username, loggedIn})
 })
 
 //route to create a new spell
@@ -47,7 +48,7 @@ router.get('/:id/:spellIndex/edit', (req, res)=>{
 	const { username, userId, loggedIn } = req.session
 	Spell.findById(spellIndex)
 		.then(spell =>{
-			res.render('spells/edit', {spell, characterId})
+			res.render('spells/edit', {spell, characterId, username, loggedIn})
 		})
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)
@@ -66,6 +67,23 @@ router.put('/:id/:spellIndex', (req, res)=>{
 		.then(spell =>{
 			console.log('the updated spell', spell)
 			res.redirect(`/spells/${characterId}/${spell.id}`)
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
+
+//delete route
+router.delete('/:id/:spellIndex', (req, res)=>{
+	const characterId = req.params.id
+	const spellIndex = req.params.spellIndex
+	Spell.findByIdAndRemove(spellIndex)
+		.then(spell =>{
+			console.log('this is the spell that was removed: ', spell)
+			res.redirect(`/spells/${characterId}/mine`)
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
 		})
 })
 
