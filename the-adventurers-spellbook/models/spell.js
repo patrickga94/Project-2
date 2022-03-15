@@ -3,17 +3,21 @@ const mongoose = require('./connection')
 
 // import user model for populate
 const User = require('./user')
-const Spell = require('./spell')
 
 // destructure the schema and model constructors from mongoose
 const { Schema, model } = mongoose
 
-const characterSchema = new Schema(
-	{
+const spellSchema = new Schema(
+    {
 		name: { type: String, required: true },
-		class: { type: String, required: true },
+		desc: { type: String, required: true },
+		higher_level: {type: String},
+        range: {type: String, required: true},
+        duration: { type: String, required: true },
+        concentration: { type: Boolean, required: true},
+        casting_time: { type: String, required: true },
         level: { type: Number, required: true },
-		spells: [{type: Schema.Types.ObjectId, ref: 'Spell'}],
+        classes: [{type: String, required: true}],
 		owner: {
 			type: Schema.Types.ObjectID,
 			ref: 'User',
@@ -22,9 +26,10 @@ const characterSchema = new Schema(
 	{ timestamps: true }
 )
 
-const Character = model('Character', characterSchema)
+const Spell = model('Spell', spellSchema)
+
 
 /////////////////////////////////
 // Export our Model
 /////////////////////////////////
-module.exports = Character
+module.exports = Spell

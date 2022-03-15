@@ -1,7 +1,7 @@
 {% layout 'layout.liquid' %}
 {% block content %}
     <h1>{{spell.name}}</h1>
-    <p>Range: {{spell.range}}, Components: {{spell.components}},</p>
+    <p>Range: {{spell.range}}, Components: {{spell.components}}, {%if spell.material.length > 0%} Materials: {{spell.material}} {%endif%}</p>
     <p>Level: {{spell.level}}, Casting Time: {{spell.casting_time}}, Concentration: {%if spell.concentration%} Yes {%else%} No {%endif%}</p>
     <p>{{spell.desc}}</p>
     {%if spell.higher_level.length > 0%}
