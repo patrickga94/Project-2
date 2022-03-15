@@ -7,6 +7,14 @@
     {%if spell.higher_level.length > 0%}
     <p>At higher levels: {{spell.higher_level}}</p>
     {%endif%}
-    
+    {% if spell.owner == userId %}
+    <div class="btn-group">
+
+        <a href="/spells/{{characterId}}/{{spell.id}}/edit" class="btn btn-primary">Edit</a>
+        <form action="/characters/{{ character.id }}?_method=DELETE" method="POST">
+            <input type="submit" value="Delete" class="btn btn-danger">
+        </form>
+    </div>
+    {% endif %}
     <a href="/spells/{{characterId}}">Back to spells</a>
 {%endblock%}

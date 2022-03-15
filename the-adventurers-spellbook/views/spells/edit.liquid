@@ -1,0 +1,128 @@
+
+{% layout 'layout.liquid'%}
+{% block content%}
+    <div>
+        <form action="/spells/{{spell.id}}?_method=PUT" method="POST">
+            <fieldset>
+                <legend>Edit Spell</legend>
+                <label class="form-label">
+                    Name: 
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="name"
+                        placeholder="spell name"
+                        value={{spell.name}}
+                    >
+                </label>
+                <label>
+                    Description: 
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="desc"
+                        placeholder="spell description"
+                        value={{spell.desc}}
+                    >
+                </label>
+                <label>
+                    Higer level effects: 
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="higher_level"
+                        placeholder="higher level effects (if any)"
+                        value={{spell.higher_level}}
+                    >
+                </label>
+                <label>
+                    Range: 
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="range"
+                        placeholder="spell range"
+                        value={{spell.range}}
+                    >
+                </label>
+                <label>
+                    Components: 
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="components"
+                        placeholder="spell components"
+                        value={{spell.components}}
+                    >
+                </label>
+                <label>
+                    Materials: 
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="material"
+                        placeholder="spell materials if any"
+                        value={{spell.material}}
+                    >
+                </label>
+                <label>
+                    Duration: 
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="duration"
+                        placeholder="spell duration"
+                        value={{spell.duration}}
+                    >
+                </label>
+                <label>
+                    Concentration:
+                    <input 
+                    type="checkbox" 
+                    name="concentration"
+                    class="form-check-input"
+                    {%if spell.concentration%}
+                    checked
+                    {%endif%}
+                    >
+                </label>
+                <label>
+                    Casting time: 
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="casting_time"
+                        placeholder="spell casting time"
+                        value={{spell.casting_time}}
+                    >
+                </label>
+                <label>
+                    Level: 
+                    <input
+                        class="form-control"
+                        type="number"
+                        name="level"
+                        placeholder="spell level"
+                        value={{spell.level}}
+                    >
+                </label>
+                <label>
+                    Classes: 
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="classes"
+                        placeholder="classes with spell access"
+                        value={{spell.classes}}
+                    >
+                </label>
+            </fieldset>
+            <input 
+                type="submit" 
+                value="Edit Spell"
+            >
+        </form>
+    </div>
+
+
+{%endblock%}

@@ -33,12 +33,25 @@ router.post('/', (req, res)=>{
 	req.body.concentration = req.body.concentration === "on" ? true : false 
 	req.body.owner = req.session.userId
 	Spell.create(req.body)
-		.then(data =>{
-			console.log('this is the new spell that was created', data)
-			res.redirect('spells/new')
-		})
+	.then(data =>{
+		console.log('this is the new spell that was created', data)
+		res.redirect('spells/new')
+	})
 })
 
+router.get('/:id/:spellIndex/edit', (req, res)=>{
+	const characterId = req.params.id
+	const spellIndex = req.params.spellIndex
+	const { username, userId, loggedIn } = req.session
+	Spell.findById(spellIndex)
+		.then(spell =>{
+			res.render('spells/edit', {spell})
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+
+})
 // index that shows only spells the user created
 router.get('/:id/mine', (req, res) => {
 	const characterId = req.params.id
@@ -80,19 +93,22 @@ router.get('/:id', (req, res)=>{
 		})
 })
 
+
+
+
 //show the details of each spell
 router.get('/:id/:spellIndex', (req, res)=>{
 	const characterId =req.params.id
 	const spellIndex = req.params.spellIndex
 	const { username, userId, loggedIn } = req.session
 	//search the api for the spell details
-	if(spellIndex.length < 20 && spellIndex > 0){
+	if(spellIndex.length < 20 && spellIndex.length > 0){
 		fetch(`https://www.dnd5eapi.co/api/spells/${spellIndex}`)
 			.then(responseData =>{
 				return responseData.json()
 			.then(jsonData =>{
 				const spell = jsonData
-				res.render('spells/show', {spell, username, loggedIn, characterId})
+				res.render('spells/show', {spell, username, loggedIn, characterId, userId})
 			})
 			})
 		.catch((error) => {
@@ -101,7 +117,7 @@ router.get('/:id/:spellIndex', (req, res)=>{
 	} else if(spellIndex.length > 20){
 		Spell.findById(spellIndex)
 			.then(spell =>{
-				res.render('spells/show', {spell, username, loggedIn, characterId})
+				res.render('spells/show', {spell, username, loggedIn, characterId, userId})
 			})
 			.catch((error) => {
 				res.redirect(`/error?error=${error}`)
