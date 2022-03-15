@@ -7,6 +7,8 @@
         </h2>
         <h3>Class: {{ character.class }}</h3>
         <h6>Level: {{ character.level }}</h6>
+        <a href="/spells/{{character.id}}/mine">Show my spells</a>
+
         {%if character.spells.length > 0%}
         <div>
             <h4>

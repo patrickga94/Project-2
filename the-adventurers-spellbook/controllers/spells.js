@@ -40,12 +40,17 @@ router.post('/', (req, res)=>{
 })
 
 // index that shows only spells the user created
-router.get('/mine', (req, res) => {
+router.get('/:id/mine', (req, res) => {
+	const characterId = req.params.id
     // destructure user info from req.session
     const { username, userId, loggedIn } = req.session
-	Spell.find({ owner: userId })
-		.then(spells => {
-			res.render('spells/index', { spells, username, loggedIn })
+	Character.findById(characterId)
+		.then(character =>{
+			Spell.find({ owner: userId })
+				.then(customSpells => {
+					console.log('these are my spells', customSpells)
+					res.render('spells/index', { customSpells, character, username, loggedIn })
+				})
 		})
 		.catch(error => {
 			res.redirect(`/error?error=${error}`)
@@ -80,21 +85,28 @@ router.get('/:id/:spellIndex', (req, res)=>{
 	const characterId =req.params.id
 	const spellIndex = req.params.spellIndex
 	const { username, userId, loggedIn } = req.session
-	// Character.findById(characterId)
-	// 	.then(character =>{
-			// const characterClass = character.class.toLowerCase()
-			fetch(`https://www.dnd5eapi.co/api/spells/${spellIndex}`)
-				.then(responseData =>{
-					return responseData.json()
-				.then(jsonData =>{
-					const spell = jsonData
-					res.render('spells/show', {spell, username, loggedIn, characterId})
-				})
-				})
-		// })
+	//search the api for the spell details
+	if(spellIndex.length < 20 && spellIndex > 0){
+		fetch(`https://www.dnd5eapi.co/api/spells/${spellIndex}`)
+			.then(responseData =>{
+				return responseData.json()
+			.then(jsonData =>{
+				const spell = jsonData
+				res.render('spells/show', {spell, username, loggedIn, characterId})
+			})
+			})
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)
 		})
+	} else if(spellIndex.length > 20){
+		Spell.findById(spellIndex)
+			.then(spell =>{
+				res.render('spells/show', {spell, username, loggedIn, characterId})
+			})
+			.catch((error) => {
+				res.redirect(`/error?error=${error}`)
+			})
+	}
 })
 
 
