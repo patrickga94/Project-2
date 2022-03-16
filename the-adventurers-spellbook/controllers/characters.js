@@ -84,12 +84,12 @@ router.get('/:id/edit', (req, res) => {
 })
 
 //remove spell from spellbook
-router.put('/:id/:spellIndex/remove', (req, res)=>{
+router.put('/:id/:spellId/remove', (req, res)=>{
 	const characterId = req.params.id
-	const spellIndex = req.params.spellIndex
+	const spellId = req.params.spellId
 	Character.findById(characterId)
 		.then(character =>{
-			character.spells.pull({id: spellIndex})
+			character.spells.pull(spellId)
 			return character.save()
 		})
 		.then(character =>{
