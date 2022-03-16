@@ -15,7 +15,7 @@
                 My Spells:
             </h4>
                 {%for spell in character.spells%}
-                    {%render '../spell.liquid', spell: spell, userId: userId%}
+                    {%render '../spell.liquid', spell: spell, character: character, userId: userId%}
                 {%endfor%}
         </div>
         {%endif%}

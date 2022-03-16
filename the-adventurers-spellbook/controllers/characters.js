@@ -83,6 +83,22 @@ router.get('/:id/edit', (req, res) => {
 		})
 })
 
+//remove spell from spellbook
+router.put('/:id/:spellIndex/remove', (req, res)=>{
+	const characterId = req.params.id
+	const spellIndex = req.params.spellIndex
+	Character.findById(characterId)
+		.then(character =>{
+			character.spells.pull({id: spellIndex})
+			return character.save()
+		})
+		.then(character =>{
+			res.redirect(`/characters/${characterId}`)
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
 
 
 
