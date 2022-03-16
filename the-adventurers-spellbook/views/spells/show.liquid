@@ -8,21 +8,21 @@
     <p>At higher levels: {{spell.higher_level}}</p>
     {%endif%}
     {%if spell.index%}
-    <form action="/spells/{{characterId}}/{{spell.index}}/add" method="POST">
-        <input type="submit" value="Add to Spellbook" class="btn btn-success">
+    <form action="/spells/{{character.id}}/{{spell.index}}/add" method="POST">
+        <input type="submit" value="Add to Spellbook" class="btn btn-success" >
     </form>
     {%endif%}
     <!-- <a href="/spells/{{characterId}}/{{}}"></a> -->
     {% if spell.owner == userId %}
-    <form action="/spells/{{characterId}}/{{spell.id}}/add" method="POST">
+    <form action="/spells/{{character.id}}/{{spell.id}}/add" method="POST">
         <input type="submit" value="Add to Spellbook" class="btn btn-success">
     </form>
     <div class="btn-group">
-        <a href="/spells/{{characterId}}/{{spell.id}}/edit" class="btn btn-primary">Edit</a>
+        <a href="/spells/{{character.id}}/{{spell.id}}/edit" class="btn btn-primary">Edit</a>
         <form action="/spells/{{ characterId }}/{{spell.id}}?_method=DELETE" method="POST">
             <input type="submit" value="Delete" class="btn btn-danger">
         </form>
     </div>
     {% endif %}
-    <a href="/spells/{{characterId}}">Back to spells</a>
+    <a href="/spells/{{character.id}}">Back to spells</a>
 {%endblock%}

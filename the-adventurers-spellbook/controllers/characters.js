@@ -120,8 +120,23 @@ router.put('/:id/:spellId/remove', (req, res)=>{
 // update route
 router.put('/:id', (req, res) => {
 	const characterId = req.params.id
-	// req.body.ready = req.body.ready === 'on' ? true : false
-
+	if(req.body.class == 1){
+		req.body.class = "Bard"
+	}else if(req.body.class == 2){
+		req.body.class = "Cleric"
+	}else if(req.body.class == 3){
+		req.body.class = "Druid"
+	} else if(req.body.class == 4){
+		req.body.class = "Palladin"
+	} else if(req.body.class == 5){
+		req.body.class = "Ranger"
+	} else if(req.body.class == 6){
+		req.body.class = "Sorcerer"
+	} else if(req.body.class == 7){
+		req.body.class = "Warlock"
+	} else if(req.body.class == 8){
+		req.body.class = "Wizard"
+	}
 	Character.findByIdAndUpdate(characterId, req.body, { new: true })
 
 		.then(character => {

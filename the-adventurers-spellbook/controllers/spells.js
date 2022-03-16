@@ -151,7 +151,9 @@ router.post('/:id/:spellIndex/add', (req, res)=>{
 							.then(character=>{
 								Spell.findById(spellIndex)
 									.then(data =>{
+										if(data.classes.includes(character.class)){
 										character.spells.push(data)
+										}
 										return character.save()
 									.then(character =>{
 										res.redirect(`/spells/${characterId}/${spellIndex}`)
@@ -205,25 +207,29 @@ router.get('/:id/:spellIndex', (req, res)=>{
 	const characterId =req.params.id
 	const spellIndex = req.params.spellIndex
 	const { username, userId, loggedIn } = req.session
-	//search the api for the spell details
-		fetch(`https://www.dnd5eapi.co/api/spells/${spellIndex}`)
-			.then(responseData =>{
-				return responseData.json()
-			.then(jsonData =>{
-				if(jsonData.error){
-					Spell.findById(spellIndex)
-					.then(spell =>{
-						res.render('spells/show', {spell, username, loggedIn, characterId, userId})
-					})
-					.catch((error) => {
-						res.redirect(`/error?error=${error}`)
-					})
+		Character.findById(characterId)
+			.then(character =>{
+				//search the api for the spell details
+					fetch(`https://www.dnd5eapi.co/api/spells/${spellIndex}`)
+						.then(responseData =>{
+							return responseData.json()
+						.then(jsonData =>{
+							if(jsonData.error){
+								Spell.findById(spellIndex)
+								.then(spell =>{
+									res.render('spells/show', {spell, username, loggedIn, character, userId})
+								})
+								.catch((error) => {
+									res.redirect(`/error?error=${error}`)
+								})
+			
+							} else{
+							const spell = jsonData
+							res.render('spells/show', {spell, username, loggedIn, character, userId})
+							}
+						})
+						})
 
-				} else{
-				const spell = jsonData
-				res.render('spells/show', {spell, username, loggedIn, characterId, userId})
-				}
-			})
 			})
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)
