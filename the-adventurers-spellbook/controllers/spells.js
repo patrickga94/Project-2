@@ -161,7 +161,7 @@ router.post('/:id/:spellIndex/add', (req, res)=>{
 									})
 							})
 					} else{
-					jsonData.desc = jsonData.desc[0]
+					// jsonData.desc = jsonData.desc[0]
 					jsonData.higher_level = jsonData.higher_level[0]
 					jsonData.classes = jsonData.classes.map(({ name }) => name)
 					Spell.create(jsonData)

@@ -10,7 +10,7 @@ const { Schema, model } = mongoose
 const spellSchema = new Schema(
     {
 		name: { type: String, required: true },
-		desc: { type: String, required: true },
+		desc: [{ type: String, required: true }],
 		higher_level: {type: String},
         range: {type: String, required: true},
         duration: { type: String, required: true },

@@ -1,7 +1,7 @@
 {% block content %}
     <div class="card mb-4 shadow">
         <div class="card-body">
-            <h5>Name: {{spell.name}} Level: {{spell.level}}</h5>
+            <h5><a href="/spells/{{character.id}}/{{spell.id}}">{{spell.name}}</a> Level: {{spell.level}}</h5>
             <p>{{spell.desc}}</p>
             <label>
                 Prepared:
