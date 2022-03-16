@@ -14,13 +14,9 @@
             <h4>
                 My Spells:
             </h4>
-            <ul>
                 {%for spell in character.spells%}
-                <li>
-                    <a href="">{{spell.name}} Level: {{spell.level}}</a>
-                </li>
+                    {%render '../spell.liquid', spell: spell, character: character, userId: userId%}
                 {%endfor%}
-            </ul> 
         </div>
         {%endif%}
         <a href="/spells/{{character.id}}">View Class Spells</a>
