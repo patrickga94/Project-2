@@ -20,7 +20,7 @@ const spellSchema = new Schema(
         casting_time: { type: String, required: true },
         level: { type: Number, min: 0, required: true },
         classes: [{type: String, required: true}],
-		// index: {type: String},
+		index: {type: String},
 		owner: {
 			type: Schema.Types.ObjectID,
 			ref: 'User',
