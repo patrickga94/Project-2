@@ -1,20 +1,32 @@
 {% block content %}
-    <div class="card mb-4 shadow">
-        <div class="card-body">
-            <h5><a href="/spells/{{character.id}}/{{spell.id}}">{{spell.name}}</a> Level: {{spell.level}}</h5>
-            <p>{{spell.desc}}</p>
-            <label>
-                Prepared:
-                <input 
-                type="checkbox" 
-                class="form-check-input"
-                >
-            </label>
-            <div class="d-flex justify-content-between">
-                <form action="/characters/{{character.id}}/{{spell.id}}/remove?_method=PUT" method="POST">
-                    <input type="submit" value="Remove from spellbook">
-                </form>
-            </div> 
+    <div class="accordion">
+        <div class="accordion-item">
+            <h5 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    {{spell.name}}
+                </button>
+            </h5>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <h6>
+                        <strong> Level: {{spell.level}} <a href="/spells/{{character.id}}/{{spell.id}}">Full details</a> </strong>
+                    </h6>
+                    <p>{{spell.desc}}</p>
+                    <label>
+                        Prepared:
+                        <input 
+                        type="checkbox" 
+                        class="form-check-input"
+                        >
+                    </label>
+                    <div class="d-flex justify-content-between">
+                        <form action="/characters/{{character.id}}/{{spell.id}}/remove?_method=PUT" method="POST">
+                            <input type="submit" value="Remove from spellbook">
+                        </form>
+                    </div> 
+                  
+                </div>
+              </div>
         </div>
 
     </div>
