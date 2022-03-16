@@ -92,7 +92,9 @@ router.put('/:id', (req, res) => {
 	// req.body.ready = req.body.ready === 'on' ? true : false
 
 	Character.findByIdAndUpdate(characterId, req.body, { new: true })
+
 		.then(character => {
+
 			res.redirect(`/characters/${character.id}`)
 		})
 		.catch((error) => {
@@ -104,8 +106,10 @@ router.put('/:id', (req, res) => {
 router.get('/:id', (req, res) => {
 	const characterId = req.params.id
 	Character.findById(characterId)
+		.populate('spells')
 		.then(character => {
             const {username, loggedIn, userId} = req.session
+			console.log('this is the character', character)
 			res.render('characters/show', { character, username, loggedIn, userId })
 		})
 		.catch((error) => {

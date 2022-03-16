@@ -134,6 +134,54 @@ router.get('/:id', (req, res)=>{
 		})
 })
 
+//create a new spell from the spell returned by the api
+router.post('/:id/:spellIndex/add', (req, res)=>{
+	const characterId = req.params.id
+	const spellIndex = req.params.spellIndex
+	console.log(spellIndex)
+	fetch(`https://www.dnd5eapi.co/api/spells/${spellIndex}`)
+		.then(responseData =>{
+			return responseData.json()
+		.then(jsonData =>{
+			if(jsonData.error){
+				Character.findById(characterId)
+					.then(character=>{
+						Spell.findById(spellIndex)
+							.then(data =>{
+								character.spells.push(data)
+								return character.save()
+							.then(character =>{
+								res.redirect(`/spells/${characterId}/${spellIndex}`)
+							})
+							})
+					})
+			} else{
+			jsonData.desc = jsonData.desc[0]
+			jsonData.higher_level = jsonData.higher_level[0]
+			jsonData.classes = jsonData.classes.map(({ name }) => name)
+			Spell.create(jsonData)
+				.then(spell =>{
+					console.log('new spell made', spell)
+					Character.findById(characterId)
+						.then(character =>{
+							character.spells.push(spell)
+							return character.save()
+						})
+						.then(character =>{
+							console.log(character)
+							res.redirect(`/spells/${characterId}/${spellIndex}`)
+						})
+				})
+			}
+		})
+
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+
+})
+
 
 
 

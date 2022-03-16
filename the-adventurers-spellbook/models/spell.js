@@ -14,7 +14,7 @@ const spellSchema = new Schema(
 		higher_level: {type: String},
         range: {type: String, required: true},
         duration: { type: String, required: true },
-		components: {type: String, required: true},
+		components: [{type: String, required: true}],
 		material: {type: String},
         concentration: { type: Boolean, required: true},
         casting_time: { type: String, required: true },
