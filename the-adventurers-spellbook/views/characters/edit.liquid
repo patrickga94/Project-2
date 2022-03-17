@@ -11,6 +11,7 @@
                 placeholder="{{ character.name }}"
                 value="{{ character.name }}"
                 class="form-control mb-3"
+                required
             >
             <label class="form-label">Class:</label>
             <select class="form-select mb-3" aria-label="Default select example" name="class">
@@ -30,6 +31,7 @@
                 name="level"
                 value="{{ character.level }} "
                 class="form-control mb-3"
+                required
             >
         </fieldset>
         <input type="submit" value="Edit Character" class="btn btn-success">
