@@ -1,8 +1,8 @@
 {% layout 'layout.liquid' %}
 {% block content %}
     <div class="container-md">
-        <h1>{{character.class}} Spells:</h1>
-        <a href="/characters/{{character.id}}" class="btn btn-primary mb-2">Back to {{character.name}}</a>
+        {%if spells.length >0%}<h1>{{character.class}} Spells:</h1>{%endif%}
+        <a href="/characters/{{character.id}}" class="btn btn-primary m-2">Back to {{character.name}}</a>
         <ul class="list-group list-group-flush mb-2">
         {%for spell in spells%}
             <li class="list-group-item">
