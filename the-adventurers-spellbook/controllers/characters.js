@@ -155,6 +155,9 @@ router.get('/:id', (req, res) => {
 		.populate('spells')
 		.then(character => {
             const {username, loggedIn, userId} = req.session
+			character.spells.sort(function (a, b) {
+				return a.level - b.level
+			  })
 			console.log('this is the character', character)
 			res.render('characters/show', { character, username, loggedIn, userId })
 		})
