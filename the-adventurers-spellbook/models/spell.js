@@ -11,7 +11,7 @@ const spellSchema = new Schema(
     {
 		name: { type: String, required: true },
 		desc: [{ type: String, required: true }],
-		higher_level: {type: String},
+		higher_level: [{type: String}],
         range: {type: String, required: true},
         duration: { type: String, required: true },
 		components: [{type: String, required: true}],
