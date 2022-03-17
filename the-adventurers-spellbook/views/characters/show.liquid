@@ -2,15 +2,16 @@
 {% block content %}
 <div class="container-md">
     <article>
-        <h2>
+        <h1>
             {{ character.name }}
-        </h2>
+        </h1>
         <h3>Class: {{ character.class }}</h3>
         <h6>Level: {{ character.level }}</h6>
+        <a href="/spells/{{character.id}}" class="btn btn-primary">View Class Spells</a>
+        <a href="/spells/{{character.id}}/mine" class="btn btn-secondary">Show my custom spells</a>
         {% if character.owner == userId %}
+        <a href="/characters/{{ character.id }}/edit" class="btn btn-warning">Edit Character</a>
         <div class="btn-group">
-
-            <a href="/characters/{{ character.id }}/edit" class="btn btn-primary">Edit Character</a>
             <form action="/characters/{{ character.id }}?_method=DELETE" method="POST">
                 <input type="submit" value="Delete Character" class="btn btn-danger">
             </form>
@@ -19,7 +20,7 @@
         {%if character.spells.length > 0%}
         <div>
             <h4>
-                My Spells:
+                {{character.name}}'s Spells:
             </h4>
                 
                     {%render '../spell.liquid', character: character, userId: userId%}
@@ -28,8 +29,6 @@
         {%elsif character.spells.length == 0%}
         <h5>Check out your class spells and add some to your spellbook!</h5>
         {%endif%}
-        <a href="/spells/{{character.id}}" class="btn btn-primary">View Class Spells</a>
-        <a href="/spells/{{character.id}}/mine" class="btn btn-secondary">Show my custom spells</a>
 
     </article>
 </div>

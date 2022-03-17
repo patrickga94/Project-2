@@ -1,18 +1,20 @@
 {% layout 'layout.liquid' %}
 {% block content %}
     <div class="container-md">
-        <h1>Spells</h1>
-        <a href="/characters/{{character.id}}">Back to character</a>
-        <ul>
+        <h1>{{character.class}} Spells:</h1>
+        <a href="/characters/{{character.id}}" class="btn btn-primary mb-2">Back to {{character.name}}</a>
+        <ul class="list-group list-group-flush mb-2">
         {%for spell in spells%}
-            <li>
-                <a href="/spells/{{character.id}}/{{spell.index}}">{{spell.name}}</a>
+            <li class="list-group-item">
+                <a href="/spells/{{character.id}}/{{spell.index}}" class="link-dark">{{spell.name}}</a>
             </li>
         {%endfor%}
-        <h1>Custom Spells: </h1>
-        <a href="/spells/new">Create New Spell</a>
+        </ul>
+        <h1>Custom {{character.class}} Spells: </h1>
+        <a href="/spells/new" class="btn btn-success mb-2">Create New Spell</a>
+        <ul class="list-group list-group-flush mb-3">
         {%for spell in customSpells%}
-        <li>
+        <li class="list-group-item">
             <a href="/spells/{{character.id}}/{{spell.id}}">{{spell.name}} Level: {{spell.level}}</a>
         </li>
     {%endfor%}

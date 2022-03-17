@@ -1,5 +1,6 @@
 {% layout 'layout.liquid' %}
 {% block content %}
+<div class="container-md">
     <h1>{{spell.name}}</h1>
     <p>Range: {{spell.range}}, Components: {{spell.components}}, {%if spell.material.length > 0%} Materials: {{spell.material}} {%endif%}</p>
     <p>Level: {{spell.level}}, Casting Time: {{spell.casting_time}}, Concentration: {%if spell.concentration%} Yes {%else%} No {%endif%}</p>
@@ -9,21 +10,22 @@
     {%endif%}
     {%if spell.index%}
     <form action="/spells/{{character.id}}/{{spell.index}}/add" method="POST">
-        <input type="submit" value="Add to Spellbook" class="btn btn-success" >
+        <input type="submit" value="Add to Spellbook" class="btn btn-success m-3" >
     </form>
     {%endif%}
 
     {% if spell.owner == userId %}
     <form action="/spells/{{character.id}}/{{spell.id}}/add" method="POST">
-        <input type="submit" value="Add to Spellbook" class="btn btn-success">
+        <input type="submit" value="Add to Spellbook" class="btn btn-success m-3">
     </form>
+    <a href="/spells/{{character.id}}/{{spell.id}}/edit" class="btn btn-warning">Edit</a>
     <div class="btn-group">
-        <a href="/spells/{{character.id}}/{{spell.id}}/edit" class="btn btn-primary">Edit</a>
         <form action="/spells/{{ character.id }}/{{spell.id}}?_method=DELETE" method="POST">
             <input type="submit" value="Delete" class="btn btn-danger">
         </form>
     </div>
     {% endif %}
-    <a href="/spells/{{character.id}}">Back to spells</a>
-    <a href="/characters/{{character.id}}">Back to {{character.name}}</a>
+    <a href="/spells/{{character.id}}" class="btn btn-primary">Back to spells</a>
+    <a href="/characters/{{character.id}}" class="btn btn-secondary">Back to {{character.name}}</a>
+</div>
 {%endblock%}
