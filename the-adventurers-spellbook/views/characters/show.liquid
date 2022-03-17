@@ -13,9 +13,9 @@
             <h4>
                 My Spells:
             </h4>
-                {%for spell in character.spells%}
-                    {%render '../spell.liquid', spell: spell, character: character, userId: userId%}
-                {%endfor%}
+                
+                    {%render '../spell.liquid', character: character, userId: userId%}
+               
         </div>
         {%elsif character.spells.length == 0%}
         <h5>Check out your class spells and add some to your spellbook!</h5>

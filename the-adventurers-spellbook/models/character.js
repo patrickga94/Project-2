@@ -14,6 +14,7 @@ const characterSchema = new Schema(
 		class: { type: String, required: true },
         level: { type: Number, required: true },
 		spells: [{type: Schema.Types.ObjectId, ref: 'Spell'}],
+		// prepared_spells: [{type: Schema.Types.ObjectId, ref: 'Spell'}],
 		owner: {
 			type: Schema.Types.ObjectID,
 			ref: 'User',
