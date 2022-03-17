@@ -3,7 +3,7 @@
 <div class="container-md">
     <article>
         <h2>
-            {{ character.name }} -
+            {{ character.name }}
         </h2>
         <h3>Class: {{ character.class }}</h3>
         <h6>Level: {{ character.level }}</h6>
@@ -28,8 +28,8 @@
         {%elsif character.spells.length == 0%}
         <h5>Check out your class spells and add some to your spellbook!</h5>
         {%endif%}
-        <a href="/spells/{{character.id}}">View Class Spells</a>
-        <a href="/spells/{{character.id}}/mine">Show my custom spells</a>
+        <a href="/spells/{{character.id}}" class="btn btn-primary">View Class Spells</a>
+        <a href="/spells/{{character.id}}/mine" class="btn btn-secondary">Show my custom spells</a>
 
     </article>
 </div>

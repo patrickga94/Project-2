@@ -89,9 +89,10 @@ router.post('/', (req, res) => {
 router.get('/:id/edit', (req, res) => {
 	// we need to get the id
 	const characterId = req.params.id
+	const { username, userId, loggedIn } = req.session
 	Character.findById(characterId)
 		.then(character => {
-			res.render('characters/edit', { character })
+			res.render('characters/edit', { character, username, loggedIn })
 		})
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)

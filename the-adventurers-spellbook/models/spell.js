@@ -19,7 +19,7 @@ const spellSchema = new Schema(
         concentration: { type: Boolean, required: true},
         casting_time: { type: String, required: true },
         level: { type: Number, min: 0, required: true },
-        classes: [{type: String, required: true}],
+        classes: [{type: String, required: true, minlength: 4}],
 		index: {type: String},
 		owner: {
 			type: Schema.Types.ObjectID,

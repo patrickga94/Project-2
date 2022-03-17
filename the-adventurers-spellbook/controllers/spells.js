@@ -61,6 +61,9 @@ router.put('/:id/:spellIndex', (req, res)=>{
 	const characterId = req.params.id
 	const spellIndex = req.params.spellIndex
 	req.body.classes = req.body.classes.split(" ")
+	if(req.body.level == null){
+		req.body.level = 0
+	}
 	req.body.concentration = req.body.concentration === "on" ? true : false 
 	const { username, userId, loggedIn } = req.session
 	Spell.findByIdAndUpdate(spellIndex, req.body, {new: true})
@@ -161,21 +164,20 @@ router.post('/:id/:spellIndex/add', (req, res)=>{
 									})
 							})
 					} else{
-					// jsonData.higher_level = jsonData.higher_level[0]
-					jsonData.classes = jsonData.classes.map(({ name }) => name)
-					Spell.create(jsonData)
-						.then(spell =>{
-							console.log('new spell made', spell)
-							Character.findById(characterId)
-								.then(character =>{
-									character.spells.push(spell)
-									return character.save()
-								})
-								.then(character =>{
-									console.log(character)
-									res.redirect(`/spells/${characterId}/${spellIndex}`)
-								})
-						})
+						jsonData.classes = jsonData.classes.map(({ name }) => name)
+						Spell.create(jsonData)
+							.then(spell =>{
+								console.log('new spell made', spell)
+								Character.findById(characterId)
+									.then(character =>{
+										character.spells.push(spell)
+										return character.save()
+									})
+									.then(character =>{
+										console.log(character)
+										res.redirect(`/spells/${characterId}/${spellIndex}`)
+									})
+							})
 					}
 				})
 		
