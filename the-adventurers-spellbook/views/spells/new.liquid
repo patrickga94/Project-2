@@ -1,108 +1,140 @@
 
 {% layout 'layout.liquid'%}
 {% block content%}
-    <div>
+    <div class="container-md">
         <form action="/spells" method="POST">
             <fieldset>
                 <legend>Create New Spell</legend>
-                <label class="form-label">
-                    Name: 
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="name"
-                        placeholder="spell name"
-                    >
-                </label>
-                <label>
-                    Description: 
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="desc"
-                        placeholder="spell description"
-                    >
-                </label>
-                <label>
-                    Higer level effects: 
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="higher_level"
-                        placeholder="higher level effects (if any)"
-                    >
-                </label>
-                <label>
-                    Range: 
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="range"
-                        placeholder="spell range"
-                    >
-                </label>
-                <label>
-                    Components: 
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="components"
-                        placeholder="spell components"
-                    >
-                </label>
-                <label>
-                    Materials: 
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="material"
-                        placeholder="spell materials if any"
-                    >
-                </label>
-                <label>
-                    Duration: 
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="duration"
-                        placeholder="spell duration"
-                    >
-                </label>
-                <label>
-                    Concentration:
-                    <input 
-                    type="checkbox" 
-                    name="concentration"
-                    class="form-check-input"
-                    >
-                </label>
-                <label>
-                    Casting time: 
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="casting_time"
-                        placeholder="spell casting time"
-                    >
-                </label>
-                <label>
-                    Level: 
-                    <input
-                        class="form-control"
-                        type="number"
-                        name="level"
-                        placeholder="spell level"
-                    >
-                </label>
-                <label>
-                    Classes: 
-                    <input
-                        class="form-control"
-                        type="text"
-                        name="classes"
-                        placeholder="classes with spell access"
-                    >
-                </label>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label class="form-label">
+                            Name: 
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="name"
+                                placeholder="spell name"
+                            >
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label>
+                            Description: 
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="desc"
+                                placeholder="spell description"
+                            >
+                        </label>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label>
+                            Higer level effects: 
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="higher_level"
+                                placeholder="higher level effects (if any)"
+                            >
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label>
+                            Range: 
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="range"
+                                placeholder="spell range"
+                            >
+                        </label>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label>
+                            Components: 
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="components"
+                                placeholder="spell components"
+                            >
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label>
+                            Materials: 
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="material"
+                                placeholder="spell materials if any"
+                            >
+                        </label>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label>
+                            Duration: 
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="duration"
+                                placeholder="spell duration"
+                            >
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label>
+                            Casting time: 
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="casting_time"
+                                placeholder="spell casting time"
+                            >
+                        </label>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label>
+                            Level: 
+                            <input
+                                class="form-control"
+                                type="number"
+                                name="level"
+                                placeholder="spell level"
+                            >
+                        </label>
+                    </div>
+                    <div class="col">
+                        <label>
+                            Classes: 
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="classes"
+                                placeholder="classes with spell access"
+                            >
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>
+                        Concentration:
+                        <input 
+                        type="checkbox" 
+                        name="concentration"
+                        class="form-check-input"
+                        >
+                    </label>
+                </div>
             </fieldset>
             <input 
                 type="submit" 
