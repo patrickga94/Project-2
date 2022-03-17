@@ -1,10 +1,12 @@
 {% layout 'layout.liquid' %}
 {% block content %}
-<div class="container-md">
+<div class="container-md mt-2" style="background-color: white; border-radius: 5px;">
     <h1>{{spell.name}}</h1>
-    <p>Range: {{spell.range}}, Components: {{spell.components}}, {%if spell.material.length > 0%} Materials: {{spell.material}} {%endif%}</p>
-    <p>Level: {{spell.level}}, Casting Time: {{spell.casting_time}}, Concentration: {%if spell.concentration%} Yes {%else%} No {%endif%}</p>
-    <p>{{spell.desc}}</p>
+    <div class="spellStats">
+        <p>Range: {{spell.range}}, Components: {{spell.components}}, {%if spell.material.length > 0%} Materials: {{spell.material}} {%endif%}</p>
+        <p>Level: {{spell.level}}, Casting Time: {{spell.casting_time}}, Concentration: {%if spell.concentration%} Yes {%else%} No {%endif%}</p>
+    </div>
+    {%for description in spell.desc%}<p>{{description}}</p>{%endfor%}
     {%if spell.higher_level.length > 0%}
     <p>At higher levels: {{spell.higher_level}}</p>
     {%endif%}

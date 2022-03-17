@@ -21,17 +21,18 @@
             </h5>
             <div id="panelsStayOpen-collapse{{forloop.index0}}" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading{{forloop.index0}}">
                 <div class="accordion-body">
-
+                    <div class="spellStats">
                     <p>Range: {{spell.range}}, Components: {{spell.components}}, {%if spell.material.length > 0%} Materials: {{spell.material}} {%endif%}</p>
-                    <p>Level: {{spell.level}}, Casting Time: {{spell.casting_time}}, Concentration: {%if spell.concentration%} Yes {%else%} No {%endif%}</p>
-                    <p>{{spell.desc}}</p>
+                    <p>Casting Time: {{spell.casting_time}}, Concentration: {%if spell.concentration%} Yes {%else%} No {%endif%}</p>
+                    </div>
+                    {%for description in spell.desc%}<p>{{description}}</p>{%endfor%}
                     <p>{{spell.higher_level}}</p>
                     <form action="/characters/">
 
                 </form>
                     <div class="d-flex justify-content-between">
                         <form action="/characters/{{character.id}}/{{spell.id}}/remove?_method=PUT" method="POST">
-                            <input type="submit" value="Remove from spellbook">
+                            <input type="submit" class="btn btn-danger" value="Remove from spellbook">
                         </form>
                     </div> 
                   

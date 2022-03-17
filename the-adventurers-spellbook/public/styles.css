@@ -5,3 +5,8 @@ body {
 li:hover {
     background-color: beige;
 }
+
+.spellStats {
+    background-color: lightgray;
+    font-weight: bold;
+}
