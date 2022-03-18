@@ -6,7 +6,7 @@
         <ul class="list-group list-group-flush mb-2">
         {%for spell in spells%}
             <li class="list-group-item">
-                <a href="/spells/{{character.id}}/{{spell.index}}" class="link-dark">{{spell.name}}</a>
+                <a href="/spells/{{character.id}}/{{spell.index}}" class="btn stretched-link">{{spell.name}}</a>
             </li>
         {%endfor%}
         </ul>
@@ -15,7 +15,7 @@
         <ul class="list-group list-group-flush mb-3">
         {%for spell in customSpells%}
         <li class="list-group-item">
-            <a href="/spells/{{character.id}}/{{spell.id}}">{{spell.name}} Level: {{spell.level}}</a>
+            <a href="/spells/{{character.id}}/{{spell.id}}" class="btn stretched-link">{{spell.name}} Level: {{spell.level}}</a>
         </li>
     {%endfor%}
         </ul>

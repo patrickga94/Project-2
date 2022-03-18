@@ -2,13 +2,19 @@
 {% block content %}
 <div class="container-md">
     <article>
-        <h1>
+        <h1 class="display-1">
             {{ character.name }}
         </h1>
-        <h3>Class: {{ character.class }}</h3>
-        <h6>Level: {{ character.level }}</h6>
+        <div>
+        <h3 >
+            Class: {{ character.class }}   
+        </h3>
+        </div>
+        <h5>
+            Level: {{ character.level }}
+        </h6>
         <a href="/spells/{{character.id}}" class="btn btn-primary">View Class Spells</a>
-        <a href="/spells/{{character.id}}/mine" class="btn btn-secondary">Show my custom spells</a>
+        <a href="/spells/{{character.id}}/mine" class="btn btn-secondary">View Custom Spells</a>
         {% if character.owner == userId %}
             <a href="/characters/{{ character.id }}/edit" class="btn btn-warning">Edit Character</a>
             <div class="btn-group">
