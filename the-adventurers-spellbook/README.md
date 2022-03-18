@@ -12,7 +12,14 @@ User Story:
 
 Technologies:
 
-I plan on using CSS, javascript, mongoose, mongodb, express, liquid, and the dnd5eapi (https://www.dnd5eapi.co/docs/#intro)
+- Css
+- Javascript
+- Express
+- Liquid express views
+- Mongoose
+- Bootstrap
+- Spell and class info from: dnd5eapi (https://www.dnd5eapi.co/docs/#intro)
+- Background patterns from Hero Patterns (https://heropatterns.com/)
 
 
 Whiteboard: https://miro.com/app/board/uXjVOF-fKPE=/?invite_link_id=869719621228

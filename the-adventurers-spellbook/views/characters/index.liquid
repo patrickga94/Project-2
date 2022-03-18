@@ -5,7 +5,7 @@
     <div class="row">
         {% for character in characters %}
         <div class="card m-1" style="width: 18rem;">
-            <h5 class="card-header" {%if character.class == "Bard"%} style="background-color: pink;" {%elsif character.class == "Cleric"%} style="background-color: palegoldenrod;" {%elsif character.class == "Druid"%} style="background-color: peru;" {%elsif character.class == "Palladin"%} style="background-color: gold;" {%elsif character.class == "Ranger"%} style="background-color: forestgreen;" {%elsif character.class == "Sorcerer"%} style="background-color: indianred;" {%elsif character.class == "Warlock"%} style="background-color: rgb(184, 95, 181);" {%elsif character.class == "Wizard"%} style="background-color: steelblue;" {%endif%}>
+            <h5 class="card-header" {%if character.class == "Bard"%} style="background-color: pink;" {%elsif character.class == "Cleric"%} style="background-color: palegoldenrod;" {%elsif character.class == "Druid"%} style="background-color: peru;" {%elsif character.class == "Paladin"%} style="background-color: gold;" {%elsif character.class == "Ranger"%} style="background-color: forestgreen;" {%elsif character.class == "Sorcerer"%} style="background-color: indianred;" {%elsif character.class == "Warlock"%} style="background-color: rgb(184, 95, 181);" {%elsif character.class == "Wizard"%} style="background-color: steelblue;" {%endif%}>
                 {{ character.name }}
             </h5>
             <div class="card-body">

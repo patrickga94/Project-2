@@ -27,3 +27,8 @@ li:hover {
 #main {
     margin-top: 75px;
 }
+
+img {
+    height: 60px;
+    width: 60px;
+}
