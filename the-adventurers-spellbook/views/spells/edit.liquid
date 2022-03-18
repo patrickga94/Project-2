@@ -138,6 +138,7 @@
                                 name="classes"
                                 placeholder="{{spell.classes}}"
                                 minlength="4"
+                                value="{%for class in spell.classes%}{{class}} {%endfor%}"
                                 required
                             >
                         </label>
