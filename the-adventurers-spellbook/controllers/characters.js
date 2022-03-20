@@ -119,13 +119,6 @@ router.put('/:id', (req, res) => {
 	} else if(req.body.class == 8){
 		req.body.class = "Wizard"
 	}
-	if(req.body.class != Character.findById(characterId).class){
-		Character.findById(characterId)
-			.then(character =>{
-				character.spells = []
-				return character.save()
-			})
-	}
 	Character.findByIdAndUpdate(characterId, req.body, { new: true })
 
 		.then(character => {

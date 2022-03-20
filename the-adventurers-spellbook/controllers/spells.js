@@ -61,7 +61,6 @@ router.put('/:id/:spellIndex', (req, res)=>{
 	const characterId = req.params.id
 	const spellIndex = req.params.spellIndex
 	req.body.classes = req.body.classes.split(" ")
-	req.body.level = req.body.level === null ? 0 : req.body.level
 	req.body.concentration = req.body.concentration === "on" ? true : false 
 	const { username, userId, loggedIn } = req.session
 	Spell.findByIdAndUpdate(spellIndex, req.body, {new: true})
