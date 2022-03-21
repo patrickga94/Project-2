@@ -57,6 +57,7 @@ router.get('/new', (req, res) => {
 
 // create -> POST route that actually calls the db and makes a new document
 router.post('/', (req, res) => {
+	//this if statement takes the values from the class dropdown menu and converts them into playable classes
 	if(req.body.class == 1){
 		req.body.class = "Bard"
 	}else if(req.body.class == 2){
@@ -102,6 +103,7 @@ router.get('/:id/edit', (req, res) => {
 // update route
 router.put('/:id', (req, res) => {
 	const characterId = req.params.id
+		//this if statement takes the values from the class dropdown menu and converts them into playable classes
 	if(req.body.class == 1){
 		req.body.class = "Bard"
 	}else if(req.body.class == 2){
@@ -153,6 +155,7 @@ router.put('/:id/:spellId/remove', (req, res)=>{
 router.get('/:id', (req, res) => {
 	const characterId = req.params.id
 	Character.findById(characterId)
+	//populate the spell subdocuments
 		.populate('spells')
 		.then(character => {
             const {username, loggedIn, userId} = req.session

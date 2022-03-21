@@ -31,7 +31,9 @@ router.get('/new', (req, res)=>{
 
 //route to create a new spell
 router.post('/', (req, res)=>{
+	//splits classes into an array
 	req.body.classes = req.body.classes.split(" ")
+	//checks for concentration
 	req.body.concentration = req.body.concentration === "on" ? true : false 
 	req.body.owner = req.session.userId
 	Spell.create(req.body)
@@ -121,6 +123,7 @@ router.get('/:id', (req, res)=>{
 					return responseData.json()
 				.then(jsonData =>{
 					spells = jsonData.results
+					//finds all the custom spells that the character's class has access to
 					Spell.find({$and: [{classes: {$in: [character.class]}}, {owner: userId}]})
 						.then(spellList =>{
 							customSpells = spellList
@@ -139,13 +142,16 @@ router.post('/:id/:spellIndex/add', (req, res)=>{
 	const characterId = req.params.id
 	const spellIndex = req.params.spellIndex
 	console.log(spellIndex)
+	//checks the database to see if this spell has already been added from the API
 	Spell.findOne({index: `${spellIndex}`})
 		.then(object =>{
 			if(object == undefined){
+				//searches the API with the spell's index
 				fetch(`https://www.dnd5eapi.co/api/spells/${spellIndex}`)
 				.then(responseData =>{
 					return responseData.json()
 				.then(jsonData =>{
+					//if the spell isn't in the API it's a custom spell so we look it up by its id
 					if(jsonData.error){
 						Character.findById(characterId)
 							.then(character=>{
@@ -162,6 +168,7 @@ router.post('/:id/:spellIndex/add', (req, res)=>{
 							})
 					} else{
 						jsonData.classes = jsonData.classes.map(({ name }) => name)
+						//creates a spell from the jsonData returned by the fetch request
 						Spell.create(jsonData)
 							.then(spell =>{
 								console.log('new spell made', spell)
@@ -212,6 +219,7 @@ router.get('/:id/:spellIndex', (req, res)=>{
 						.then(responseData =>{
 							return responseData.json()
 						.then(jsonData =>{
+							//if the spell is custom:
 							if(jsonData.error){
 								Spell.findById(spellIndex)
 								.then(spell =>{
