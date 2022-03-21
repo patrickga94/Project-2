@@ -1,5 +1,5 @@
 {% block content %}
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md fixed-top navbar-dark shadow rounded-bottom" id="navbar">
     <div class="container-fluid">
         <a href="/" class="navbar-brand">The Adventurer's Spellbook</a>
         {% if loggedIn %}
@@ -13,7 +13,7 @@
                 <!-- <a href="/characters" class="nav-link text-light">View All</a> -->
                 <a href="/characters/new" class="nav-link text-light">New Character</a>
                 <a href="/characters/mine" class="nav-link text-light">My Characters</a>
-                <!-- <a href="/spells/mine" class="nav-link text-light">My Spells</a> -->
+                <a href="/spells/new" class="nav-link text-light">New Spell</a>
                 <a href="/auth/logout" class="nav-link text-light">Log Out</a>
             {% else %}
                 <a href="/auth/signup" class="nav-link text-light">Sign Up</a>

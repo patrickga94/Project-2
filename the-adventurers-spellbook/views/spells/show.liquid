@@ -1,28 +1,33 @@
 {% layout 'layout.liquid' %}
 {% block content %}
+<div class="container-md mt-2" style="background-color: white; border-radius: 5px;">
     <h1>{{spell.name}}</h1>
-    <p>Range: {{spell.range}}, Components: {{spell.components}}, {%if spell.material.length > 0%} Materials: {{spell.material}} {%endif%}</p>
-    <p>Level: {{spell.level}}, Casting Time: {{spell.casting_time}}, Concentration: {%if spell.concentration%} Yes {%else%} No {%endif%}</p>
-    <p>{{spell.desc}}</p>
+    <div class="spellStats">
+        <p>Range: {{spell.range}}, Components: {{spell.components}}, {%if spell.material.length > 0%} Materials: {{spell.material}} {%endif%}</p>
+        <p>Level: {{spell.level}}, Casting Time: {{spell.casting_time}}, Concentration: {%if spell.concentration%} Yes {%else%} No {%endif%}</p>
+    </div>
+    {%for description in spell.desc%}<p>{{description}}</p>{%endfor%}
     {%if spell.higher_level.length > 0%}
     <p>At higher levels: {{spell.higher_level}}</p>
     {%endif%}
     {%if spell.index%}
-    <form action="/spells/{{characterId}}/{{spell.index}}/add" method="POST">
-        <input type="submit" value="Add to Spellbook" class="btn btn-success">
+    <form action="/spells/{{character.id}}/{{spell.index}}/add" method="POST">
+        <input type="submit" value="Add to Spellbook" class="btn btn-success m-3" >
     </form>
     {%endif%}
-    <!-- <a href="/spells/{{characterId}}/{{}}"></a> -->
+
     {% if spell.owner == userId %}
-    <form action="/spells/{{characterId}}/{{spell.id}}/add" method="POST">
-        <input type="submit" value="Add to Spellbook" class="btn btn-success">
+    <form action="/spells/{{character.id}}/{{spell.id}}/add" method="POST">
+        <input type="submit" value="Add to Spellbook" class="btn btn-success m-3">
     </form>
+    <a href="/spells/{{character.id}}/{{spell.id}}/edit" class="btn btn-warning">Edit</a>
     <div class="btn-group">
-        <a href="/spells/{{characterId}}/{{spell.id}}/edit" class="btn btn-primary">Edit</a>
-        <form action="/spells/{{ characterId }}/{{spell.id}}?_method=DELETE" method="POST">
+        <form action="/spells/{{ character.id }}/{{spell.id}}?_method=DELETE" method="POST">
             <input type="submit" value="Delete" class="btn btn-danger">
         </form>
     </div>
     {% endif %}
-    <a href="/spells/{{characterId}}">Back to spells</a>
+    <a href="/spells/{{character.id}}" class="btn btn-primary">Back to spells</a>
+    <a href="/characters/{{character.id}}" class="btn btn-secondary">Back to {{character.name}}</a>
+</div>
 {%endblock%}

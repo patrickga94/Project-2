@@ -57,8 +57,24 @@ router.get('/new', (req, res) => {
 
 // create -> POST route that actually calls the db and makes a new document
 router.post('/', (req, res) => {
-	req.body.ready = req.body.ready === 'on' ? true : false
-
+	//this if statement takes the values from the class dropdown menu and converts them into playable classes
+	if(req.body.class == 1){
+		req.body.class = "Bard"
+	}else if(req.body.class == 2){
+		req.body.class = "Cleric"
+	}else if(req.body.class == 3){
+		req.body.class = "Druid"
+	} else if(req.body.class == 4){
+		req.body.class = "Paladin"
+	} else if(req.body.class == 5){
+		req.body.class = "Ranger"
+	} else if(req.body.class == 6){
+		req.body.class = "Sorcerer"
+	} else if(req.body.class == 7){
+		req.body.class = "Warlock"
+	} else if(req.body.class == 8){
+		req.body.class = "Wizard"
+	}
 	req.body.owner = req.session.userId
 	Character.create(req.body)
 		.then(character => {
@@ -74,15 +90,47 @@ router.post('/', (req, res) => {
 router.get('/:id/edit', (req, res) => {
 	// we need to get the id
 	const characterId = req.params.id
+	const { username, userId, loggedIn } = req.session
 	Character.findById(characterId)
 		.then(character => {
-			res.render('characters/edit', { character })
+			res.render('characters/edit', { character, username, loggedIn })
 		})
 		.catch((error) => {
 			res.redirect(`/error?error=${error}`)
 		})
 })
 
+// update route
+router.put('/:id', (req, res) => {
+	const characterId = req.params.id
+		//this if statement takes the values from the class dropdown menu and converts them into playable classes
+	if(req.body.class == 1){
+		req.body.class = "Bard"
+	}else if(req.body.class == 2){
+		req.body.class = "Cleric"
+	}else if(req.body.class == 3){
+		req.body.class = "Druid"
+	} else if(req.body.class == 4){
+		req.body.class = "Paladin"
+	} else if(req.body.class == 5){
+		req.body.class = "Ranger"
+	} else if(req.body.class == 6){
+		req.body.class = "Sorcerer"
+	} else if(req.body.class == 7){
+		req.body.class = "Warlock"
+	} else if(req.body.class == 8){
+		req.body.class = "Wizard"
+	}
+	Character.findByIdAndUpdate(characterId, req.body, { new: true })
+
+		.then(character => {
+
+			res.redirect(`/characters/${character.id}`)
+		})
+		.catch((error) => {
+			res.redirect(`/error?error=${error}`)
+		})
+})
 //remove spell from spellbook
 router.put('/:id/:spellId/remove', (req, res)=>{
 	const characterId = req.params.id
@@ -102,29 +150,18 @@ router.put('/:id/:spellId/remove', (req, res)=>{
 
 
 
-// update route
-router.put('/:id', (req, res) => {
-	const characterId = req.params.id
-	// req.body.ready = req.body.ready === 'on' ? true : false
-
-	Character.findByIdAndUpdate(characterId, req.body, { new: true })
-
-		.then(character => {
-
-			res.redirect(`/characters/${character.id}`)
-		})
-		.catch((error) => {
-			res.redirect(`/error?error=${error}`)
-		})
-})
 
 // show route
 router.get('/:id', (req, res) => {
 	const characterId = req.params.id
 	Character.findById(characterId)
+	//populate the spell subdocuments
 		.populate('spells')
 		.then(character => {
             const {username, loggedIn, userId} = req.session
+			character.spells.sort(function (a, b) {
+				return a.level - b.level
+			  })
 			console.log('this is the character', character)
 			res.render('characters/show', { character, username, loggedIn, userId })
 		})
