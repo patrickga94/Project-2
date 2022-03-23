@@ -10,6 +10,43 @@ User Story:
 - As a user I want to be able to select spells to add to my known spells list, remove spells from my known spells list, and mark spells as prepared or unprepared
 - As a user I want to be able to create my own spells with forms for name, description, level, damage, requirements, and higher level effects
 
+Route Tables:
+
+### Authentication
+
+| Verb   | URI Pattern            | Controller Action |
+|--------|------------------------|-------------------|
+| POST   | `/auth/signup`             | `users signup`    |
+| POST   | `/auth/login`             | `users login`    |
+| DELETE | `/auth/logout/`        | `users logout`   |
+
+### Characters
+
+| Verb   | URI Pattern            | Controller Action |
+|--------|------------------------|-------------------|
+| GET   | `/characters/mine`             | `index`    |
+| GET   | `/characters/:id`             | `show`    |
+| GET   | `/characters/new`             | `new`    |
+| POST   | `/characters`             | `create`    |
+| GET   | `/characters/:id/edit`             | `edit`    |
+| PUT   | `/characters/:id`             | `update`    |
+| DELETE | `/characters/:id`        | `destroy`   |
+
+### Spells
+
+| Verb   | URI Pattern            | Controller Action |
+|--------|------------------------|-------------------|
+| GET   | `/spells/:id/mine`             | `index`    |
+| GET   | `/spells/:id`             | `index`    |
+| GET   | `/spells/:id/:spellIndex`             | `show`    |
+| GET   | `/spells/new`             | `new`    |
+| POST   | `/spells`             | `create`    |
+| GET   | `/spells/:id/:spellIndex/edit`             | `edit`    |
+| PUT   | `/spells/:id/:spellIndex`             | `update`    |
+| POST   | `/spells/:id/:spellIndex/add`             | `create`    |
+| DELETE | `/spells/:id/:spellIndex`        | `destroy`   |
+
+
 Technologies:
 
 - Css
@@ -21,6 +58,13 @@ Technologies:
 - Spell and class info from: dnd5eapi (https://www.dnd5eapi.co/docs/#intro)
 - Background patterns from Hero Patterns (https://heropatterns.com/)
 
+Installation:
+- Fork and clone this repo
+- Create a .env file and add the following:
+    DATABASE_URL=mongodb://localhost/<database name>
+    PORT=3000
+    SECRET=thiscanbeanythingaslongasitsinyourenvfileitsfine
+- Run npm install to install all the necessary node packages
 
 Whiteboard: https://miro.com/app/board/uXjVOF-fKPE=/?invite_link_id=869719621228
 
